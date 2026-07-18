@@ -20,10 +20,6 @@ node_modules/
 *.log
 npm-debug.log*
 
-# Build output
-dist/
-dist-ssr/
-
 # OS files
 .DS_Store
 Thumbs.db
@@ -41,5 +37,5 @@ Thumbs.db
 # Test coverage
 coverage/
 
-# Test files
-test_endpoints.js
+# Build output
+dist/

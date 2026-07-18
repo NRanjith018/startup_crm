@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 // Lazy load page components to improve initial loading speed of the application
@@ -14,11 +14,21 @@ const Settings = lazy(() => import('../pages/Settings'));
 
 /**
  * ProtectedRoute Component
- * Route wrapper that redirects unauthenticated users to the Landing page.
+ * Route wrapper that redirects unauthenticated users to the Login page.
+ * Uses <Outlet /> to render nested child routes.
  */
-function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? children : <Navigate to="/landing" replace />;
+function ProtectedRoute() {
+  const { token, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+      </div>
+    );
+  }
+
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 /**
@@ -33,39 +43,13 @@ export default function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* Private Pages protected by ProtectedRoute */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/leads"
-        element={
-          <ProtectedRoute>
-            <Leads />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/analytics"
-        element={
-          <ProtectedRoute>
-            <Analytics />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/settings"
-        element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        }
-      />
+      {/* Private Pages protected by ProtectedRoute nesting */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/leads" element={<Leads />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
 
       {/* Catch-All Route for 404 Pages */}
       <Route path="*" element={<NotFound />} />
