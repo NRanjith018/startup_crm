@@ -123,7 +123,7 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB Database first, then bind listener
 let server;
 connectDB().then(() => {
-  server = app.listen(PORT, () => {
+  server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT} in ${NODE_ENV} mode`);
   });
 });
