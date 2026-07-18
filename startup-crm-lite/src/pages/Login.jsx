@@ -15,8 +15,8 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('ranjith.n@mits.ac.in');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -51,13 +51,7 @@ export default function Login() {
           <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Sign In to your account</h2>
         </div>
 
-        {/* Info panel showing developer credentials helper (Must register first in local db) */}
-        <div className="rounded-lg bg-blue-50/70 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 p-4 text-xs text-blue-800 dark:text-blue-450 dark:text-blue-400 space-y-1">
-          <p className="font-semibold text-slate-900 dark:text-slate-205 dark:text-slate-200">Student Developer Details:</p>
-          <p>Email: <span className="font-bold">ranjith.n@mits.ac.in</span></p>
-          <p>Password: <span className="font-bold">password123</span></p>
-          <p className="text-[10px] text-slate-500 pt-1">Note: If loading on a fresh database, please click "Register new profile" below first to initialize your account credentials.</p>
-        </div>
+
 
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
