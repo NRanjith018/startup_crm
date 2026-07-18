@@ -2,5 +2,11 @@
   "buildCommand": "cd startup-crm-lite && npm install && npm run build",
   "outputDirectory": "startup-crm-lite/dist",
   "installCommand": "cd startup-crm-lite && npm install",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
 }
