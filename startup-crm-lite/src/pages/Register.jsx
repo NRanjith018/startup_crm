@@ -17,10 +17,10 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: 'N Ranjith',
-    email: 'ranjith.n@mits.ac.in',
-    password: 'password123',
-    confirmPassword: 'password123',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
