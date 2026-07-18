@@ -15,7 +15,6 @@ export default function Settings() {
     name: user?.name || '',
     email: user?.email || '',
     company: user?.company || '',
-    registerNo: user?.registerNo || '',
   });
 
   const handleChange = (e) => {
@@ -100,21 +99,6 @@ export default function Settings() {
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
-                    Register Number
-                  </label>
-                  <div className="relative">
-                    <Shield className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400 dark:text-slate-500" />
-                    <input
-                      type="text"
-                      name="registerNo"
-                      value={formData.registerNo}
-                      onChange={handleChange}
-                      className="w-full rounded-lg border border-slate-300 dark:border-slate-800 pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/40 transition-all"
-                    />
-                  </div>
-                </div>
               </div>
 
               <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-800">
@@ -126,29 +110,6 @@ export default function Settings() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-
-        {/* Right: Info Card */}
-        <div className="space-y-6">
-          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4 transition-colors duration-200">
-            <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 border-b border-slate-100 dark:border-slate-800 pb-3">
-              Developer Info
-            </h3>
-            <div className="text-sm space-y-2.5 text-slate-600 dark:text-slate-350">
-              <p>
-                <span className="font-semibold text-slate-900 dark:text-slate-50">Name:</span> {user?.name}
-              </p>
-              <p>
-                <span className="font-semibold text-slate-900 dark:text-slate-50">ID:</span> {user?.registerNo}
-              </p>
-              <p>
-                <span className="font-semibold text-slate-900 dark:text-slate-50">Institution:</span> Madanapalle Institute (MITS)
-              </p>
-              <p>
-                <span className="font-semibold text-slate-900 dark:text-slate-50">Branch:</span> CSE (Computer Science)
-              </p>
-            </div>
           </div>
         </div>
       </div>

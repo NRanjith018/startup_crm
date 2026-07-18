@@ -21,9 +21,9 @@ export default function FunnelChartCard({ data = [] }) {
         </p>
       </div>
 
-      <div className="flex-1 flex flex-col sm:flex-row items-center justify-center gap-6 mt-4">
+      <div className="flex-1 flex flex-col gap-6 mt-4">
         {/* Recharts Funnel representation */}
-        <div className="flex-1 h-56 w-full">
+        <div className="w-full h-48 sm:h-56">
           <ResponsiveContainer width="100%" height="100%">
             <FunnelChart margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
               <Tooltip
@@ -47,8 +47,8 @@ export default function FunnelChartCard({ data = [] }) {
           </ResponsiveContainer>
         </div>
 
-        {/* Detailed funnel conversion rates and dropoffs listing sidebar */}
-        <div className="w-full sm:w-60 max-h-56 overflow-y-auto space-y-3 px-2">
+        {/* Detailed funnel conversion rates and dropoffs listing */}
+        <div className="w-full space-y-3 px-1">
           {data.map((stage, idx) => (
             <div key={stage.name} className="space-y-1">
               <div className="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-400">

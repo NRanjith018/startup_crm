@@ -50,7 +50,7 @@ export default function TopPerformersCard({ data = [] }) {
               <div className="flex items-center gap-3">
                 {/* Ranking Medal/Number */}
                 <div className={`h-7 w-7 flex items-center justify-center rounded-lg border text-xs font-bold ${getMedalColor(idx)}`}>
-                  {idx < 3 ? <Award className="h-4 w-4" /> : idx + 1}
+                  <Award className="h-4 w-4" />
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
