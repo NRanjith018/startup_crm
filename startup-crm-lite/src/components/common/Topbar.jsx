@@ -200,7 +200,7 @@ export default function Topbar() {
         <div className="flex items-center gap-3">
           <div 
             className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white text-xs font-bold shadow-xs flex items-center justify-center select-none"
-            title={`${user?.name || 'Dev Raj'} (${user?.email || 'devaraj.b@mits.ac.in'})`}
+            title={`${user?.name || 'Ranjith'} (${user?.email || 'ranjith.n@mits.ac.in'})`}
           >
             {getInitials(user?.name)}
           </div>

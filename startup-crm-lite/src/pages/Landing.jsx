@@ -97,7 +97,7 @@ export default function Landing() {
       {/* Footer MITS Branding */}
       <footer className="py-8 bg-white border-t border-slate-200 text-center text-xs text-slate-400">
         <p>© 2026 Madanapalle Institute of Technology & Science. All rights reserved.</p>
-        <p className="mt-1 text-slate-350 font-medium">B.Tech Computer Science & Engineering — Bhojanapu Devaraj (25695A0514)</p>
+        <p className="mt-1 text-slate-350 font-medium">B.Tech Computer Science & Engineering — N Ranjith (25695A0514)</p>
       </footer>
     </div>
   );

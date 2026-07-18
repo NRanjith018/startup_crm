@@ -17,8 +17,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: 'Bhojanapu Devaraj',
-    email: 'devaraj.b@mits.ac.in',
+    name: 'N Ranjith',
+    email: 'ranjith.n@mits.ac.in',
     password: 'password123',
     confirmPassword: 'password123',
   });

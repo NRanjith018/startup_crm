@@ -140,10 +140,10 @@ export default function Sidebar() {
             {/* Profile texts (hidden if collapsed) */}
             <div className={`flex flex-col text-left leading-none md:hidden ${isCollapsed ? '' : 'lg:flex'}`}>
               <span className="text-xs font-bold text-slate-900 dark:text-slate-100 truncate max-w-[120px]">
-                {user?.name || 'Dev Raj'}
+                {user?.name || 'Ranjith'}
               </span>
               <span className="text-[9px] text-slate-500 dark:text-slate-400 font-semibold mt-1 truncate max-w-[120px]">
-                {user?.email || 'devaraj.b@mits.ac.in'}
+                {user?.email || 'ranjith.n@mits.ac.in'}
               </span>
             </div>
           </div>
