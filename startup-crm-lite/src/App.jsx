@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, NavLink, Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { LayoutDashboard, Users, TrendingUp, Settings } from 'lucide-react';
+import { LayoutDashboard, Users, TrendingUp, Settings, Zap } from 'lucide-react';
 import Sidebar from './components/common/Sidebar';
 import Topbar from './components/common/Topbar';
 import AppRoutes from './routes';
+import { useAuth } from './context/AuthContext';
 
 /**
  * App Component
@@ -15,6 +16,7 @@ import AppRoutes from './routes';
  */
 function App() {
   const location = useLocation();
+  const { isDemo } = useAuth();
 
   // Check if viewing public pages (Landing, Login, Register) where navigation is hidden
   const isPublicPage = ['/landing', '/login', '/register'].includes(location.pathname);
@@ -46,6 +48,22 @@ function App() {
       {/* Main page viewer viewport pane */}
       <div className="flex-1 flex flex-col min-h-screen pb-16 md:pb-0">
         
+        {/* Demo Mode Banner */}
+        {isDemo && (
+          <div className="flex items-center justify-between gap-2 bg-amber-500 px-4 py-2 text-white text-xs font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-3.5 w-3.5 shrink-0" />
+              Demo Mode — Changes are not saved. Data resets on logout.
+            </span>
+            <Link
+              to="/login"
+              className="shrink-0 rounded bg-white/20 hover:bg-white/30 px-2.5 py-1 text-white transition-colors"
+            >
+              Sign In →
+            </Link>
+          </div>
+        )}
+
         {/* Unified Topbar containing dynamic page titles, notifications, and profile logout */}
         <Topbar />
 

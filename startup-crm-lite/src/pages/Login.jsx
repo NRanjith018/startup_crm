@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { DEMO_CREDENTIALS } from '../utils/demoMode';
 
 /**
  * Login Component
  * Renders the Login page with database credentials validation.
  * Features:
  * - Real API-driven session authentication.
+ * - Demo mode login (works without backend/database).
  * - Loading spinner buttons during request transfers.
  * - Dark mode class support.
  */
@@ -20,6 +22,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +44,20 @@ export default function Login() {
     }
   };
 
+  /** One-click demo login — works fully offline */
+  const handleDemoLogin = async () => {
+    setIsDemoLoading(true);
+    try {
+      await login(DEMO_CREDENTIALS.email, DEMO_CREDENTIALS.password);
+      toast.success('Welcome to Demo Mode! Data is not saved.', { duration: 4000 });
+      navigate('/');
+    } catch (err) {
+      toast.error('Demo login failed. Please try again.');
+    } finally {
+      setIsDemoLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center px-6 py-12 transition-colors duration-200">
       <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-xl p-8 space-y-6 transition-colors duration-200">
@@ -53,7 +70,38 @@ export default function Login() {
           <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Sign In to your account</h2>
         </div>
 
+        {/* Demo Mode Banner */}
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 p-3">
+          <p className="text-xs text-amber-700 dark:text-amber-400 text-center font-medium mb-2">
+            🚀 No account? Try the demo instantly — no backend needed.
+          </p>
+          <button
+            id="demo-login-btn"
+            type="button"
+            onClick={handleDemoLogin}
+            disabled={isDemoLoading || isSubmitting}
+            className="w-full flex items-center justify-center gap-2 rounded-lg bg-amber-500 hover:bg-amber-600 active:bg-amber-700 py-2.5 text-sm font-semibold text-white shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {isDemoLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                Loading Demo...
+              </span>
+            ) : (
+              <>
+                <Zap className="h-4 w-4" />
+                Try Demo (No Login Required)
+              </>
+            )}
+          </button>
+        </div>
 
+        {/* Divider */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 border-t border-slate-200 dark:border-slate-700" />
+          <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">or sign in with your account</span>
+          <div className="flex-1 border-t border-slate-200 dark:border-slate-700" />
+        </div>
 
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +117,7 @@ export default function Login() {
               className="w-full rounded-lg border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/30 transition-colors"
               placeholder="name@company.com"
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isDemoLoading}
             />
           </div>
 
@@ -86,7 +134,7 @@ export default function Login() {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 pr-10 text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/30 transition-colors"
                 placeholder="••••••••"
                 required
-                disabled={isSubmitting}
+                disabled={isSubmitting || isDemoLoading}
               />
               <button
                 type="button"
@@ -104,7 +152,8 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            id="login-submit-btn"
+            disabled={isSubmitting || isDemoLoading}
             className="w-full rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 shadow-md transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-h-[44px]"
           >
             {isSubmitting ? (
